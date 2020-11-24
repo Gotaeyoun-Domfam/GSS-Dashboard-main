@@ -1,0 +1,44 @@
+
+@import "pages/variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+@import "lib/bootstrap-datepicker3";
+@import "lib/bootstrap-table";
+@import "lib/swiper";
+@import "lib/Chart";
+
+
+@import "fonts/NotoSansCJK";
+@import "layout/layout";
+
+
+
+@import "pages/reboot";
+@import "pages/gss";
+@import "pages/gss_sub";
+
+
+
+.btn {
+  -webkit-border-radius: 19px;
+  -moz-border-radius: 19px;
+  border-radius: 19px;
+  height: 40px;
+  line-height: 38px;
+  padding: 0 36px;
+  font-size: 14px;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+.col-4{
+  flex: 0 0 32.25%;
+  max-width: 32.25%;}
+
+
+
+
+

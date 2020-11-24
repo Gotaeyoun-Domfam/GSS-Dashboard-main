@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ko">
+@@include('../html/include/head.html')
+<body>
+<div class="wrap">
+
+  <div class="bg_header">
+    <div class="header">
+      <h1 class="logo"><a href="main_design.html"><img src="../img/common/img_logo.png"></a></h1>
+      <a href="#" class="btn btn-blue">아이템 상세분석</a>
+    </div>
+  </div>
+
+  <div class="contents">
+    <div class="bg_visual">
+      <div class="visual">
+        <div class="title">
+          <p class="tit">Risk Sensing Report</p>
+          <p class="sub">RSR 시스템은 전체 데이터를 분석하여 빠르게 RISK 아이템을 추출하여<br/>앞으로 나올 수 있는 이슈를 먼저 발빠르게 대응하고 있습니다.</p>
+        </div>
+        <div class="sort">
+          <span class="tit">기간</span>
+          <span class="date"><select class="custom-select" title="기간설정">
+            <option selected="">1일</option>
+            <option>2일</option>
+            <option>3일</option>
+            <option>4일</option>
+            <option>5일</option>
+            <option>6일</option>
+            <option>7일</option>
+            <option>8일</option>
+            <option>9일</option>
+            <option>10일</option>
+          </select></span>
+          <span class="tit">카테고리</span>
+          <span class="date"><select class="custom-select" title="기간설정">
+            <option selected="">전체</option>
+            <option>카테고리</option>
+            <option>카테고리</option>
+            <option>카테고리</option>
+            <option>카테고리</option>
+            <option>카테고리</option>
+          </select></span>
+        </div>
+        <div class="target">
+          <p class="total">Risk 아이템 분석 대상 12,000건 분석</p>
+          <p class="date">2020.01.01 12:00</p>
+        </div>
+        <div class="risk_count">
+          <p><span class="mount">204</span><span class="slash"> / 12000</span></p>
+        </div>
+        <div class="graph" id="chartdiv" style="background-color: transparent;">
+        </div>
+        <script>
+          am4core.ready(function () {
+            am4core.useTheme(am4themes_animated);
+            var chart = am4core.create("chartdiv", am4charts.XYChart);
+            chart.data = [{
+              "country": "11/01",
+              "visits": 126
+            }, {
+              "country": "11/02",
+              "visits": 61
+            }, {
+              "country": "11/03",
+              "visits": 180
+            }, {
+              "country": "11/04",
+              "visits": 133
+            }, {
+              "country": "11/05",
+              "visits": 112
+            }, {
+              "country": "11/06",
+              "visits": 114
+            }, {
+              "country": "11/07",
+              "visits": 84
+            }, {
+              "country": "11/08",
+              "visits": 111
+            }, {
+              "country": "11/09",
+              "visits": 65
+            }, {
+              "country": "11/10",
+              "visits": 80
+            }, {
+              "country": "11/11",
+              "visits": 105
+            }, {
+              "country": "11/12",
+              "visits": 204
+            }];
+
+
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "country";
+            categoryAxis.renderer.grid.template.strokeOpacity = 0;
+            categoryAxis.renderer.minGridDistance = 30;
+            categoryAxis.renderer.line.strokeOpacity = 1;
+            categoryAxis.renderer.line.strokeWidth = 1;
+            categoryAxis.renderer.line.stroke = am4core.color("#ffffff");
+            categoryAxis.renderer.labels.template.fill = am4core.color("#ffffff");
+
+            categoryAxis.renderer.labels.template.adapter.add("dy", function (dy, target) {
+              if (valueAxis.dataItem && target.dataItem.index & 2 == 2) {
+                return dy + 25;
+              }
+              return dy;
+            });
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.renderer.grid.template.strokeOpacity = 0;
+            valueAxis.renderer.line.strokeOpacity = 1;
+            valueAxis.renderer.line.strokeWidth = 1;
+            valueAxis.renderer.line.stroke = am4core.color("#ffffff");
+            valueAxis.renderer.labels.template.fill = am4core.color("#ffffff");
+
+
+            var series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.valueY = "visits";
+            series.dataFields.categoryX = "country";
+            series.name = "Visits";
+            series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+            series.columns.template.fillOpacity = .8;
+            series.columns.template.fill = am4core.color("#8CD9D3");
+            ;
+            series.columns.template.fillOpacity = 1;
+            series.columns.template.width = 27;
+
+
+            var columnTemplate = series.columns.template;
+            columnTemplate.strokeWidth = 0;
+
+
+          });
+        </script>
+
+      </div>
+    </div>
+
+    <div class="bg-gray">
+      <div class="wrap_inner">
+        <div class="inside_risk">
+          <h2 class="title">내부 데이터 RISK 보기</h2>
+          <div class="section_itemDetail">
+            <div class="list_collapse off" id="inner">
+              <div class="btn_collapse"><a href="#"><img src="../img/common/btn_collapse.png"></a></div>
+              <h3 class="title">RISK 아이템 미리보기</h3>
+              <h4 class="title">RISK ITEM</h4>
+              <div class="list">
+                <ul>
+                  <li class="focus"><a href="#"><span class="tit">1. LG TROMM 건조기LG TROMM 건조기LG TROMM 건조기 </span><span class="count">80</span></a></li>
+                  <li><a href="#"><span class="tit">2. LG TROMM 건조기 </span><span class="count">80</span></a></li>
+                  <li><a href="#"><span class="tit">3. LG TROMM 건조기 </span><span class="count">80</span></a></li>
+                  <li><a href="#"><span class="tit">4. LG TROMM 건조기 </span><span class="count">80</span></a></li>
+                  <li><a href="#"><span class="tit">5. LG TROMM 건조기 </span><span class="count">80</span></a></li>
+                </ul>
+              </div>
+            </div>
+            <script>
+              $(function () {
+                var list = $('#inner');
+                list.on('click', '.btn_collapse', function () {
+                  if (list.is('.off')) {
+                    list.removeClass('off');
+                  } else {
+                    list.addClass('off');
+                  }
+
+                });
+              })
+
+            </script>
+            <div class="point">
+              <div class="chart" id="chartGauge" style="width: 350px;height: 200px;"></div>
+
+              <!-- Chart code -->
+              <script>
+                am4core.ready(function() {
+
+                  am4core.useTheme(am4themes_animated);
+
+                  var chartMin = 0;
+                  var chartMax = 100;
+
+                  var data = {
+                    score: 88,
+                    gradingData: [
+                      {
+                        title: "관심",
+                        color: "#3ac7c9",
+                        lowScore: 0,
+                        highScore: 25
+                      },
+                      {
+                        title: "주의",
+                        color: "#76c76c",
+                        lowScore: 25,
+                        highScore: 50
+                      },
+                      {
+                        title: "경고",
+                        color: "#fdbe47",
+                        lowScore: 50,
+                        highScore: 75
+                      },
+                      {
+                        title: "위험",
+                        color: "#f14c51",
+                        lowScore: 75,
+                        highScore: 100
+                      }
+                    ]
+                  };
+
+                  /**
+                   Grading Lookup
+                   */
+                  function lookUpGrade(lookupScore, grades) {
+                    // Only change code below this line
+                    for (var i = 0; i < grades.length; i++) {
+                      if (
+                        grades[i].lowScore < lookupScore &&
+                        grades[i].highScore >= lookupScore
+                      ) {
+                        return grades[i];
+                      }
+                    }
+                    return null;
+                  }
+
+// create chart
+                  var chart = am4core.create("chartGauge", am4charts.GaugeChart);
+                  chart.hiddenState.properties.opacity = 0;
+                  chart.fontSize = 12;
+                  chart.fontcolor = am4core.color("#444");;
+                  chart.innerRadius = am4core.percent(80);
+                  chart.resizable = false;
+                  ;
+
+                  /**
+                   * Normal axis
+                   */
+
+                  var axis = chart.xAxes.push(new am4charts.ValueAxis());
+                  axis.min = chartMin;
+                  axis.max = chartMax;
+                  axis.strictMinMax = true;
+                  axis.renderer.radius = am4core.percent(80);
+                  axis.renderer.inside = true;
+                  axis.renderer.line.strokeOpacity = 0;
+                  axis.renderer.ticks.template.disabled = false;
+                  axis.renderer.ticks.template.strokeOpacity = 1;
+                  axis.renderer.ticks.template.strokeWidth = 0;
+                  axis.renderer.ticks.template.length = 5;
+                  axis.renderer.grid.template.disabled = true;
+                  axis.renderer.labels.template.radius = am4core.percent(15);
+                  axis.renderer.labels.template.fontSize = "0";
+
+                  /**
+                   * Axis for ranges
+                   */
+
+                  var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
+                  axis2.min = chartMin;
+                  axis2.max = chartMax;
+                  axis2.strictMinMax = true;
+                  axis2.renderer.labels.template.disabled = true;
+                  axis2.renderer.ticks.template.disabled = true;
+                  axis2.renderer.grid.template.disabled = false;
+                  axis2.renderer.grid.template.opacity = 0;
+                  axis2.renderer.labels.template.bent = true;
+                  axis2.renderer.labels.template.fill = am4core.color("#333333");
+                  axis2.renderer.labels.template.fillOpacity = 1;
+
+
+
+                  /**
+                   Ranges
+                   */
+
+                  for (let grading of data.gradingData) {
+                    var range = axis2.axisRanges.create();
+                    range.axisFill.fill = am4core.color(grading.color);
+                    range.axisFill.fillOpacity = 0.8;
+                    range.axisFill.zIndex = -1;
+                    range.value = grading.lowScore > chartMin ? grading.lowScore : chartMin;
+                    range.endValue = grading.highScore < chartMax ? grading.highScore : chartMax;
+                    range.grid.strokeOpacity = 0;
+                    range.stroke = am4core.color(grading.color).lighten(-0.1);
+                    range.label.inside = true;
+                    range.label.text = grading.title.toUpperCase();
+                    range.label.inside = true;
+                    range.label.location = 0.5;
+                    range.label.inside = true;
+                    range.label.radius = am4core.percent(10);
+                    range.label.paddingBottom = -5; // ~half font size
+                    range.label.fontSize = "0.9em";
+                  }
+
+                  var matchingGrade = lookUpGrade(data.score, data.gradingData);
+
+                  /**
+                   * Label 1
+                   */
+
+                  var label = chart.radarContainer.createChild(am4core.Label);
+                  label.isMeasured = false;
+                  label.fontSize = "60px";
+                  label.x = am4core.percent(100);
+                  label.paddingBottom = -15;
+                  label.horizontalCenter = "middle";
+                  label.verticalCenter = "bottom";
+                  label.text = data.score.toFixed(0);
+                  label.fill = am4core.color(matchingGrade.color);
+
+                  /**
+                   * Hand
+                   */
+
+                  var hand = chart.hands.push(new am4charts.ClockHand());
+                  hand.axis = axis2;
+                  hand.innerRadius = am4core.percent(60);
+                  hand.startWidth = 1;
+                  hand.pin.disabled = true;
+                  hand.value = data.score;
+                  hand.fill = am4core.color("#444");
+                  hand.stroke = am4core.color("#000");
+
+                }); // end am4core.ready()
+              </script>
+
+
+              <div class="btn_more"><a href="#"><img src="../img/common/btn_more.png"></a></div>
+              <div class="range">
+                <span class="tit">전일대비</span><span class="count"><i class="fas fa-arrow-alt-up"></i> 4</span><span class="badge_top"><img src="../img/common/badge_top.png"></span>
+              </div>
+              <div class="emotion">
+                <span class="good" style="width: 50%;"></span><span class="normal" style="width: 20%;"></span><span class="bad" style="width: 30%;"></span>
+              </div>
+              <div class="rate">
+                <span class="cancel"><i></i>취소율 24%</span><span class="recall"><i></i>반품율 17%</span>
+              </div>
+            </div>
+            <div class="spec">
+              <ul class="info">
+                <li><span class="tit">아이템명</span><span class="desc font-weight-bold">LG TROMM 건조기</span></li>
+                <li><span class="tit">아이템코드</span><span class="desc">57904319</span></li>
+                <li><span class="tit">카테고리명</span><span class="desc">가전</span></li>
+                <li><span class="tit">최근 방송 상품</span><span class="desc">LG트롬 듀얼 인버터 건조기 16KG RH16VNA</span></li>
+                <li><span class="tit">최근 방송일</span><span class="desc">2020년 06월 20일</span></li>
+              </ul>
+              <div class="btn-wrap"><a href="#" class="btn btn-primary">아이템 상세분석</a></div>
+            </div>
+
+
+          </div>
+          <div class="section_srGraph">
+            <h3 class="title">주요 SR 유형별 점유율</h3>
+            <div class="chart" id="chartrador" style="background-color: transparent; width: 100%;height: 300px;">
+            </div>
+
+            <script>
+              am4core.ready(function () {
+                am4core.useTheme(am4themes_animated);
+
+                var chart = am4core.create("chartrador", am4charts.RadarChart);
+                chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+                chart.width = 200;
+                chart.align = "center";
+                chart.data = [
+                  {
+                    category: "이벤트/ \n프로모션관련",
+                    value1: 8,
+                    value2: 2
+                  },
+                  {
+                    category: "배송관련",
+                    value1: 11,
+                    value2: 4
+                  },
+                  {
+                    category: "상품품질 관련",
+                    value1: 7,
+                    value2: 6
+                  },
+                  {
+                    category: "주문 관련",
+                    value1: 13,
+                    value2: 8
+                  },
+                  {
+                    category: "결제/환불\n관련",
+                    value1: 12,
+                    value2: 10
+                  },
+                  {
+                    category: "교환/반품/\nAS관련",
+                    value1: 15,
+                    value2: 12
+                  }
+                ];
+
+                chart.padding(30);
+
+                var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.dataFields.category = "category";
+                categoryAxis.renderer.labels.template.location = 0.5;
+                categoryAxis.renderer.tooltipLocation = 0.1;
+                categoryAxis.renderer.cellStartLocation = 0.2;
+                categoryAxis.renderer.cellEndLocation = 0.9;
+
+                categoryAxis.renderer.labels.template.fill = am4core.color("#333333");
+
+
+                var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.tooltip.disabled = true;
+                valueAxis.renderer.labels.template.horizontalCenter = "left";
+
+                var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+                series1.columns.template.tooltipText = "{name}: {valueY.value}";
+                series1.name = "Series 1";
+                series1.dataFields.categoryX = "category";
+                series1.dataFields.valueY = "value1";
+
+
+                var series2 = chart.series.push(new am4charts.RadarColumnSeries());
+                series2.columns.template.tooltipText = "{name}: {valueY.value}";
+                series2.name = "Series 2";
+                series2.dataFields.categoryX = "category";
+                series2.dataFields.valueY = "value2";
+
+
+                chart.seriesContainer.zIndex = -1;
+
+
+                chart.cursor = new am4charts.RadarCursor();
+                chart.cursor.xAxis = categoryAxis;
+                chart.cursor.fullWidthXLine = true;
+                chart.cursor.lineX.strokeOpacity = 0;
+                chart.cursor.lineX.fillOpacity = 0.1;
+                chart.cursor.lineX.fill = am4core.color("#333333");
+
+              }); // end am4core.ready()
+            </script>
+
+
+
+
+          </div>
+        </div>
+        <div class="outside_risk">
+          <h2 class="title">외부 데이터 RISK 보기</h2>
+          <div class="section_statistics">
+            <ul>
+              <li>
+                <span class="title">외부데이터분석 건수</span>
+                <span class="data data_y"><i class="fal fa-database"></i></span>
+                <span class="value">120,320<span class="unit">건</span></span>
+              </li>
+              <li>
+                <span class="title">RISK 키워드 건수</span>
+                <span class="data data_r"><i class="fal fa-database"></i></span>
+                <span class="value">320<span class="unit">건</span></span>
+
+              </li>
+              <li>
+                <span class="title">부정데이터 건수</span>
+                <span class="data data_b"><i class="fal fa-database"></i></span>
+                <span class="value">20<span class="unit">건</span></span>
+              </li>
+            </ul>
+          </div>
+          <div class="section_question">
+            <div class="list">
+              <ul>
+                <li>
+                  <span class="icon"><i class="fal fa-user-circle"></i></span>
+                  <span class="spec"><span class="quotation">원문출처</span><span class="date">2020.09.23</span></span>
+                  <span class="desc">LG전자 콘데서 자동세척 불량으로 리콜 기사님/배송전/불량상품 배송받으면 어떻게 되는지? 어떻게 처리되는지 문의드립니다. <em>간편</em>하게 문의 할 수 있는 방법은 따로 없을까요?  </span>
+                </li>
+                <li>
+                  <span class="icon"><i class="fal fa-user-circle"></i></span>
+                  <span class="spec"><span class="quotation">원문출처</span><span class="date">2020.09.23</span></span>
+                  <span class="desc">LG전자 콘데서 자동세척 불량으로 리콜 기사님/배송전/불량상품 배송받으면 어떻게 되는지? 어떻게 처리되는지 문의드립니다. <em>간편</em>하게 문의 할 수 있는 방법은 따로 없을까요?  </span>
+                </li>
+                <li>
+                  <span class="icon"><i class="fal fa-user-circle"></i></span>
+                  <span class="spec"><span class="quotation">원문출처</span><span class="date">2020.09.23</span></span>
+                  <span class="desc">LG전자 콘데서 자동세척 불량으로 리콜 기사님/배송전/불량상품 배송받으면 어떻게 되는지? 어떻게 처리되는지 문의드립니다. <em>간편</em>하게 문의 할 수 있는 방법은 따로 없을까요?  </span>
+                </li>
+                <li>
+                  <span class="icon"><i class="fal fa-user-circle"></i></span>
+                  <span class="spec"><span class="quotation">원문출처</span><span class="date">2020.09.23</span></span>
+                  <span class="desc">LG전자 콘데서 자동세척 불량으로 리콜 기사님/배송전/불량상품 배송받으면 어떻게 되는지? 어떻게 처리되는지 문의드립니다. <em>간편</em>하게 문의 할 수 있는 방법은 따로 없을까요?  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="list_collapse" id="outer">
+              <div class="btn_collapse"><a href="#"><img src="../img/common/btn_colllapse_red.png"></a></div>
+              <h3 class="title">RISK 키워드 순위</h3>
+              <div class="keyword">
+                <div class="title"><span class="rank">순위</span><span class="danger">위험 키워드</span></div>
+                <ol>
+                  <li class="focus"><a href="#"><span class="rank">1</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">2</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">3</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">4</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">5</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">6</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">7</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">8</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">9</span><span class="danger">간편</span></a></li>
+                  <li><a href="#"><span class="rank">10</span><span class="danger">간편</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <script>
+              $(function () {
+                var list = $('#outer');
+                list.on('click', '.btn_collapse', function () {
+                  if (list.is('.off')) {
+                    list.removeClass('off');
+                  } else {
+                    list.addClass('off');
+                  }
+
+                });
+              })
+            </script>
+
+          </div>
+        </div>
+        <div class="keyword_risk">
+          <h2 class="title">RISK 키워드 미래신호분석</h2>
+          <div class="section_chart">
+            <div class="chart">
+              <canvas id="canvas" style="height: 558px;"></canvas>
+              <div id="legend">
+                <p>
+                  <span><i class="l1"></i>신생</span>
+                  <span><i class="l2"></i>성장</span>
+                  <span><i class="l3"></i>성숙</span>
+                  <span><i class="l4"></i>쇠퇴</span>
+                </p>
+              </div>
+              <div class="area">
+                <span class="a1">신생</span>
+                <span class="a2">성장</span>
+                <span class="a3">성숙</span>
+                <span class="a4">쇠퇴</span>
+              </div>
+
+            </div>
+            <script>
+              var color = Chart.helpers.color;
+
+              var scatterChartData = {
+                datasets: [{
+                  label: '신생',
+                  borderColor: "#da2a51",
+                  backgroundColor: "#da2a51",
+
+                  data: [{"x": -25, "y": -77, "text": "hello"}, {"x": -76, "y": -55, "text": "hello"}, {"x": 11, "y": -83, "text": "hello"}, {"x": 75, "y": 87, "text": "hello"}, {"x": 60, "y": 49, "text": "hello"}, {"x": 35, "y": 36, "text": "hello"}, {"x": -49, "y": -62, "text": "hello"}]
+                }, {
+                  label: '성장',
+                  borderColor: "#00ab9f",
+                  backgroundColor: "#00ab9f",
+                  data: [{"x": -72, "y": 63, "text": "hello"}, {"x": 80, "y": 19, "text": "hello"}, {"x": 69, "y": -57, "text": "hello"}, {"x": -6, "y": 52, "text": "hello"}, {"x": 12, "y": -66, "text": "hello"}, {"x": 96, "y": -31, "text": "hello"}, {"x": -76, "y": 85}]
+                }, {
+                  label: '성숙',
+                  borderColor: "#494933",
+                  backgroundColor: "#494933",
+                  data: [{"x": 12, "y": 68, "text": "hello"}, {"x": 77, "y": 6, "text": "hello"}, {"x": 81, "y": 96, "text": "hello"}, {"x": 62, "y": -18, "text": "hello"}, {"x": -37, "y": 61, "text": "hello"}, {"x": 55, "y": -36, "text": "hello"}, {"x": 87, "y": -17}]
+                }, {
+                  label: '쇠퇴',
+                  borderColor: "#a39a64",
+                  backgroundColor: "#a39a64",
+                  data: [{"x": -19, "y": 24, "text": "hello"}, {"x": 50, "y": 97, "text": "hello"}, {"x": -45, "y": -62, "text": "hello"}, {"x": -3, "y": -36, "text": "hello"}, {"x": -68, "y": -38, "text": "hello"}, {"x": -67, "y": -86, "text": "hello"}, {"x": 77, "y": -54}]
+                }
+                ]
+              };
+
+              window.onload = function () {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myScatter = Chart.Scatter(ctx, {
+                  data: scatterChartData,
+                  options: {
+                    title: {
+                      display: false
+                    },
+                    legend: false,
+                    padding: {},
+                    label: {
+                      display: false
+                    },
+                    plugins: {
+                      datalabels: {
+                        align: "right",
+                        font: {
+                          size: 14,
+                          style: "#333333"
+                        },
+                        formatter: function (val) {
+                          console.log(val);
+                          return val.text;
+                        }
+                      }
+                    }
+                  },
+
+                });
+              };
+
+
+            </script>
+
+
+            <div class="analysis">
+              <h4 class="title">미래신호 분석</h4>
+              <ul>
+                <li><span class="keyword">성장 키워드</span><span class="desc">스톤, 시계, 디자인, 가격, 마케팅, 클럽, TV홈쇼핑, 롯데백화점, 방송, 가격</span></li>
+                <li class="new"><span class="keyword">신생 키워드</span><span class="desc">고급시계, 이소영, 롯데백화점, 부산본점, 스타, 상품, 롯데백화점, 서울, 스타, 상품</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="logo"><img src="../img/common/img_logo.png"></div>
+    <div class="copyright">
+      <p>
+        (주) 지에스홈쇼핑 대표이사 : 김호성 / 주소 : 서울시 영등포구 선유로 75 GS강서타워<br>
+        사업자등록번호 : 117-81-13253 / 통신판매업신고 : 영등포구청 제 2002-00068호 사업자정보확인<br>
+        개인정보 보호책임자 : 이종혁 / 호스팅제공자 : (주) 지에스홈쇼핑<br>
+        고객센터(유료) : 1899-4455 / 02-2007-4545 / 팩스 : 02-393-6093 / 이메일문의 : gsshop@gsshop.com<br><br>
+        COPYRIGHT © GS HOMESHOPPING ALL RIGHTS RESERVED.
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
